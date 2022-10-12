@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <title>Coding Quiz</title>
+</head>
+<body>
+    <section id="full-start-screen">
+    <div> <!--Create <a> tag to reference highscores.html-->
+        <a href="./highscores.html">Highscores</a>
+    </div>
+
+    <div id="timer1">
+        <!-- span with timer in it-->
+        <span id="timerSpan"></span>
+    </div>
+
+    
+        <div id="start-screen" class="start">
+            <h1>Coding Quiz Challenge</h1>
+            <!-- p tag with an intro about quiz-->
+            <p class="intro">This is a quiz that will challenge your knowledge Javascript, CSS, and HTML. The best scores will be saved under the "Highscores" link</p>
+
+            <!-- start button -->
+            <button id="startButton">Start</button>
+        </div>
+        </section>
+
+        <div id="question-container" class="hide">
+        <div id="question">Question</div>
+            <h2 id="question-title"></h2>
+            <div id="choices" class="choices">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <button id="next-btn" class = "next-btn btn hide">Next</button>
+        </div>
+
+    <script src="./js/script.js"></script>
+    
+</body>
+</html>

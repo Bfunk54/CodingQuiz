@@ -1,0 +1,56 @@
+.hide {
+    display: none;
+}
+
+:root {
+    --hue-neutral: 300;
+    --hue-wrong: 0;
+    --hue-correct: 145;
+}
+
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 100%, 20%);
+    color: white;
+}
+
+body.correct {
+    --hue: var(--hue-correct);
+}
+  
+body.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.btn {
+    --hue: var(--hue-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 30%);
+    background-color: hsl(var(--hue), 100%, 50%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+}
+
+.btn:hover {
+    border-color: blue;
+}
+  
+.btn.correct {
+    --hue: var(--hue-correct);
+    color: black;
+}
+  
+.btn.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.timerSpan {
+    color: white;
+    text-size-adjust: 24px;
+}
