@@ -20,6 +20,7 @@ startBtn.addEventListener("click", () => {
 })
   function startGame() {
   console.log("Started");
+  startBtn.classList.remove('hide');
   // hide start screen 
   document.getElementById('full-start-screen').innerHTML = "";
   // un-hide questions section
@@ -61,11 +62,12 @@ function setNextQuestion() {
         showQuestions(shuffledQuestions[currentQuestionId]);
     }
     else {
-        startGame();
+        nextButton.classList.add('hide');
+        resetGame();
     }
   }
 
-  function showQuestions(title) {
+function showQuestions(title) {
     questionsEl.innerText = title.title;
     title.choices.forEach(answer => {
         const button = document.createElement('button');
@@ -86,6 +88,10 @@ function resetState() {
     while (answerChoicesEl.firstChild) {
         answerChoicesEl.removeChild(answerChoicesEl.firstChild)
     }
+}
+
+function resetGame() {
+    startBtn.classList.remove('hide');
 }
 
 function selectAnswer(e) {
