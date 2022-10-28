@@ -61,3 +61,9 @@ body.wrong {
     -webkit-text-stroke: 1px black;
     letter-spacing: 1px;
 }
+
+.highscores {
+    font-size: 24px;
+    color:aqua;
+}
+
