@@ -6,7 +6,11 @@ var questionsContainer = document.getElementById('question-container');
 var startBtn = document.getElementById('startButton');
 var nextButton = document.getElementById('next-btn');
 var theQuestions = document.getElementById('allQuestions');
-const answerChoicesEl = document.getElementById('choices');
+var answerChoicesEl = document.getElementById('choices');
+var highScores = document.getElementById('highScoresList');
+var highScoreInput = document.getElementById('highScoreName');
+var highScoreDiv = document.getElementById('highScoreInput');
+var highscoreLink = document.getElementById('highscores');
 var shuffledQuestions, currentQuestionId;
 
 nextButton.addEventListener('click', () => {
@@ -14,13 +18,14 @@ nextButton.addEventListener('click', () => {
     questionCount++;
     setNextQuestion()
 })
+
 /// FUNCTION TO START THE QUIZ
 startBtn.addEventListener("click", () => {
     startGame()
 })
   function startGame() {
   console.log("Started");
-  startBtn.classList.remove('hide');
+  startBtn.classList.add('hide');
   // hide start screen 
   document.getElementById('full-start-screen').innerHTML = "";
   // un-hide questions section
@@ -28,6 +33,11 @@ startBtn.addEventListener("click", () => {
   shuffledQuestions = allQuestions.sort(() => Math.random() - .5);
 console.log(shuffledQuestions);
   currentQuestionId = 0;
+  var score = document.createElement('div');
+        score.id = 'score';
+        score.innerHTML = '<p>Score: </p>' + points;
+        document.body.appendChild(score);
+        console.log(score);
   setNextQuestion();
   setTime();
 }
@@ -38,23 +48,27 @@ console.log(shuffledQuestions);
   function setTime() {
   // Sets interval in variable
     var timerInterval = setInterval(function() {
-      secondsLeft--;
+        secondsLeft--;
+        newTimer.textContent = secondsLeft + " seconds remaining";
+        if(secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            newTimer.textContent = " ";
+            // Call function to end the game
+            timeRanOut();
+      
+          }
       console.log(secondsLeft);
-      newTimer.textContent = secondsLeft + " seconds remaining";
+      
+      
 
-    if(secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      newTimer.textContent = " ";
-      // Call function to end the game
-      timeRanOut();
 
-    }
 
   }, 1000);
 }
 
 var questionCount = 0;
+var points = 0;
 
 function setNextQuestion() {
     if (shuffledQuestions.length > questionCount + 1) {
@@ -70,7 +84,7 @@ function setNextQuestion() {
 function showQuestions(title) {
     questionsEl.innerText = title.title;
     title.choices.forEach(answer => {
-        const button = document.createElement('button');
+        var button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
         if (answer.isCorrect) {
@@ -91,22 +105,72 @@ function resetState() {
 }
 
 function resetGame() {
-    startBtn.classList.remove('hide');
+    resetState();
+    document.body.innerHTML = "";
+        console.log(highScoreDiv);
+        highScoreDiv.style.visibility="visible";
+        var score = document.createElement('div');
+        score.id = 'score';
+        score.innerHTML = '<p>Your score was: </p>' + points + `<div id='highScoreInput'>
+        <p><br> Input your name here to be immortalized: </p> <input id="highScoreName"></input></div><br>`;
+        document.body.appendChild(score);
+        console.log(score)
+        var addScoreButton = document.createElement('button');
+        addScoreButton.innerText = 'Save Highscore';
+        addScoreButton.classList.add('btn');
+        document.body.appendChild(addScoreButton);
+        addScoreButton.addEventListener("click", () => {
+        addHighScore(points);
+        highScoreDiv.classList.add('hide');
+        document.body.innerHTML = "";
+        document.body.innerHTML = '<p>Good Job! Your Highscore was saved to the highscore page! Just reload the page and click the highscores link in the corner to view them! Otherwise, hit the restart button!</p>';
+        startBtn.innerText = 'Restart'
+        startBtn.classList.remove('hide')
+        console.log(startBtn)
+        })
+        startBtn.innerText = 'Restart'
+        startBtn.classList.remove('hide')
+        console.log(startBtn)
+        newTimer.textContent = " ";
+}
+
+function addHighScore(points) {
+    const nameLi = document.createElement('li');
+        var name = '';
+        var colon = ': ';
+        name = document.getElementById('highScoreName').value;
+        const nameObj = {name: (name),  pointsScored: (points)};
+        const nameNode = document.createTextNode('Name:' + (name) + '  Points Scored:' + (points));
+        nameLi.appendChild(nameNode);
+        console.log(nameNode);
+        console.log(nameLi);
+        highscoreCount = 0
+        highscoreLocal = 'highscores' + highscoreCount;
+        console.log(document.getElementById('highScoresList'));
+        localStorage.setItem(highscoreLocal, JSON.stringify(nameObj));
+        highscoreCount++;
+        console.log(JSON.stringify(nameObj));
+
 }
 
 function selectAnswer(e) {
-    const selectedButton = e.target;
-    const isCorrect = selectedButton.dataset.isCorrect;
+    var selectedButton = e.target;
+    var isCorrect = selectedButton.dataset.isCorrect;
+    console.log(isCorrect)
+    if (isCorrect === 'true') {
+        points= points + 7;
+        console.log(points);
+        score.innerHTML = '';
+        score.innerHTML = '<p>Score: </p>' + points;
+      } 
     setStatusClass(document.body, isCorrect);
     Array.from(answerChoicesEl.children).forEach(button => { setStatusClass(button, button.dataset.isCorrect)})
     if (shuffledQuestions.length > questionCount + 1) {
         nextButton.classList.remove('hide')
       } else {
-        startBtn.innerText = 'Restart'
-        startBtn.classList.remove('hide')
-        console.log(startBtn)
-        newTimer.textContent = " ";
+        resetGame();
       }
+      
 
 }
 
@@ -115,9 +179,7 @@ function timeRanOut() {
        
       } else {
         alert("You ran out of time!")
-        startBtn.innerText = 'Restart'
-        startBtn.classList.remove('hide')
-        newTimer.textContent = " ";
+        resetGame();
       }
 
 }
