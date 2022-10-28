@@ -8,16 +8,15 @@
     <title>Coding Quiz</title>
 </head>
 <body>
-    <section id="full-start-screen">
-    <div> <!--Create <a> tag to reference highscores.html-->
-        <a href="./highscores.html">Highscores</a>
-    </div>
-
     <div id="timer1">
         <!-- span with timer in it-->
         <span id="timerSpan"></span>
     </div>
 
+    <section id="full-start-screen">
+    <div> <!--Create <a> tag to reference highscores.html-->
+        <a id='highscores' href="./assets/highscores.html">Highscores</a>
+    </div>
     
         <div id="start-screen" class="start">
             <h1>Coding Quiz Challenge</h1>
@@ -25,9 +24,15 @@
             <p class="intro">This is a quiz that will challenge your knowledge Javascript, CSS, and HTML. The best scores will be saved under the "Highscores" link</p>
 
             <!-- start button -->
-            <button id="startButton" class="startButton btn">Start</button>
+            
         </div>
         </section>
+        <div id='highScoreInput' class='hide'>
+        <p><br> Input your name here to be immortalized: <br> </p> <input id="highScoreName"></input>
+        </div>
+
+
+        <button id="startButton" class="startButton btn">Start</button>
 
         <div id="question-container" class="hide">
         <div id="question">Question</div>
