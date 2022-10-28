@@ -67,3 +67,10 @@ body.wrong {
     color:aqua;
 }
 
+.startButton {
+    font-size: 64px;
+    background-color: aqua;
+    color:burlywood;
+    -webkit-text-stroke: 1px black;
+}
+
