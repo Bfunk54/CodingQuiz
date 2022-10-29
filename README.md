@@ -24,3 +24,8 @@ What it looks like when you finish and are prompted to enter your name for your 
 
 ![](./assets/images/Screen%20Shot%202022-10-28%20at%207.10.08%20PM.png)
 What the highscore page looks like with a highscore on it.
+
+## Links
+[Deployed Site](https://bfunk54.github.io/homework_04/)
+
+[Github Repo](https://github.com/Bfunk54/homework_04)
