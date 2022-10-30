@@ -140,14 +140,14 @@ function addHighScore(points) {
         var colon = ': ';
         name = document.getElementById('highScoreName').value;
         const nameObj = {name: (name),  pointsScored: (points)};
-        const nameNode = document.createTextNode('Name:' + (name) + '  Points Scored:' + (points));
-        nameLi.appendChild(nameNode);
+        const nameNode = 'Name:' + name + '  Points Scored:' + points;
+        // nameLi.appendChild(nameNode);
         console.log(nameNode);
         console.log(nameLi);
         highscoreCount = 0
-        highscoreLocal = 'highscores' + highscoreCount;
+        // highscoreLocal = 'highscores' + highscoreCount;
         console.log(document.getElementById('highScoresList'));
-        localStorage.setItem(highscoreLocal, JSON.stringify(nameObj));
+        localStorage.setItem('highscores', nameNode);
         highscoreCount++;
         console.log(JSON.stringify(nameObj));
 
